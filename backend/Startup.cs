@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TodoApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using Models;
 
 namespace TodoApi
 {
@@ -10,7 +11,7 @@ namespace TodoApi
     {       
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("ELISD.db"));
             services.AddMvc();
 
             // Register the Swagger generator, defining one or more Swagger documents

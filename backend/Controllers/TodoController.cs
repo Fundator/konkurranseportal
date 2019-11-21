@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.Models;
 using System.Linq;
-using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System.Net.Http.Headers;
+
+using Models;
 
 #region TodoController
 namespace TodoApi.Controllers
@@ -13,10 +11,10 @@ namespace TodoApi.Controllers
     [Route("api/[controller]")]
     public class TodoController : Controller
     {
-        private readonly TodoContext _context;
+        private readonly Context _context;
         #endregion
 
-        public TodoController(TodoContext context)
+        public TodoController(Context context)
         {
             _context = context;
 
@@ -26,6 +24,7 @@ namespace TodoApi.Controllers
                 _context.SaveChanges();
             }
         }
+
 
         #region snippet_GetAll
         [HttpGet]
