@@ -40,6 +40,11 @@ export default class Kamp extends Component {
     // fetch("http://localhost:3000/api/match")
     //   .then(response => response.json())
     //   .then(response => this.setState({ matches: response, isLoading: false }));
+
+    this.setState({ isLoading: true });
+    fetch("http://localhost:50486/api/kamp")
+      .then(response => response.json())
+      .then(data => this.setState({ matches: data, isLoading: false }));
   }
 
   render() {
@@ -54,9 +59,9 @@ export default class Kamp extends Component {
             {matches.map(d => (
               <Card key={d.id} style={{ width: "18rem" }}>
                 <Card.Body>
-                  <Card.Title>{d.Sted} {d.Dato.toDateString()}</Card.Title>
+                  <Card.Title>{d.sted}</Card.Title>
                   <Card.Text>
-                    Blergh blerg
+                    Sat whaaaaaaaayeyyeryeryeyryre
                   </Card.Text>
                 </Card.Body>
                 <Button variant="primary">Delete</Button>
