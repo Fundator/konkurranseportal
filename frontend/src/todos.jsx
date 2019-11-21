@@ -24,7 +24,7 @@ export default class Todos extends Component {
     // var graphEndpoint = "https://graph.microsoft.com/v1.0/me";
 
     this.setState({ isLoading: true });
-    fetch("http://localhost:50976/api/todo")
+    fetch("http://localhost:3000/api/todo")
       .then(response => response.json())
       .then(data => this.setState({ data: data, isLoading: false }));
   }
