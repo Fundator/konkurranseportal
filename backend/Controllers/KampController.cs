@@ -1,61 +1,68 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using TodoApi.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 
-#region TodoController
 namespace TodoApi.Controllers
 {
     [Route("api/[controller]")]
-    public class TodoController : Controller
+    public class KampController : Controller
     {
-        private readonly Context _context;
-        #endregion
 
-        public TodoController(Context context)
+        private readonly Context _context;
+
+        public KampController(Context context)
         {
             _context = context;
-
-            if (_context.TodoItems.Count() == 0)
+            Console.WriteLine("contructor");
+            /*
+            if (_context.Kamper.Count() == 0)
             {
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
+                Console.WriteLine("test");
+                _context.Kamper.Add(new Kamp { });
                 _context.SaveChanges();
-            }
+            }*/
         }
-
 
         #region snippet_GetAll
         [HttpGet]
-        public IEnumerable<TodoItem> GetAll()
+        //public IEnumerable<Kamp> Get()
+        //{
+        //    Console.WriteLine("HALLO");
+        //    return _context.Kamper.ToList();
+        //}
+        [HttpGet]
+        public IEnumerable<string> Get()
         {
-            return _context.TodoItems.ToList();
+            return new string[] { "value1", "value2" };
         }
-
+        #endregion
         #region snippet_GetByID
         [HttpGet("{id}", Name = "GetTodo")]
         public IActionResult GetById(long id)
         {
-            var item = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+            var item = _context.Kamper.FirstOrDefault(t => t.Id == id);
             if (item == null)
             {
                 return NotFound();
             }
             return new ObjectResult(item);
         }
-        #endregion
+       
         #endregion
         #region snippet_Create
         [HttpPost]
-        public IActionResult Create([FromBody] TodoItem item)
+        public IActionResult Create([FromBody] Kamp item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
 
-            _context.TodoItems.Add(item);
+            _context.Kamper.Add(item);
             _context.SaveChanges();
 
             return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
@@ -64,23 +71,19 @@ namespace TodoApi.Controllers
 
         #region snippet_Update
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] TodoItem item)
+        public IActionResult Update(long id, [FromBody] Kamp item)
         {
             if (item == null || item.Id != id)
             {
                 return BadRequest();
             }
 
-            var todo = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+            var todo = _context.Kamper.FirstOrDefault(t => t.Id == id);
             if (todo == null)
             {
                 return NotFound();
             }
-
-            todo.IsComplete = item.IsComplete;
-            todo.Name = item.Name;
-
-            _context.TodoItems.Update(todo);
+            _context.Kamper.Update(todo);
             _context.SaveChanges();
             return new NoContentResult();
         }
@@ -90,13 +93,13 @@ namespace TodoApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var todo = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+            var todo = _context.Kamper.FirstOrDefault(t => t.Id == id);
             if (todo == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todo);
+            _context.Kamper.Remove(todo);
             _context.SaveChanges();
             return new NoContentResult();
         }
