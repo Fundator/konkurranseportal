@@ -41,6 +41,12 @@ namespace TodoApi.Migrations
 
                     b.Property<int?>("KonkurranseId");
 
+                    b.Property<string>("Lag1");
+
+                    b.Property<string>("Lag2");
+
+                    b.Property<string>("Resultat");
+
                     b.Property<string>("Sted");
 
                     b.HasKey("Id");

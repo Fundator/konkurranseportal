@@ -51,23 +51,23 @@ namespace TodoApi.Controllers
         //    }
         //    return new ObjectResult(item);
         //}
-       
-        //#endregion
-        //#region snippet_Create
-        //[HttpPost]
-        //public IActionResult Create([FromBody] Kamp item)
-        //{
-        //    if (item == null)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Kamper.Add(item);
-        //    _context.SaveChanges();
+//#endregion
+        #region snippet_Create
+        [HttpPost]
+        public IActionResult Create([FromBody] Kamp item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
 
-        //    return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
-        //}
-        //#endregion
+            _context.Kamper.Add(item);
+            _context.SaveChanges();
+
+            return Ok(item);
+        }
+        #endregion
 
         //#region snippet_Update
         //[HttpPut("{id}")]
